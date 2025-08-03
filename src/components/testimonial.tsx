@@ -1,8 +1,8 @@
-// src/components/Testimonials.tsx
-import { Box, Container, Typography, Card, CardContent, Avatar } from '@mui/material';
+import { Box, Container, Typography, Card, CardContent, Avatar, useMediaQuery, useTheme } from '@mui/material';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { useState, useEffect } from 'react';
 
 const testimonials = [
   {
@@ -55,94 +55,77 @@ const testimonials = [
   },
 ];
 
+
+
 const Testimonials = () => {
+  const [deviceType, setDeviceType] = useState("mobile");
+  const theme = useTheme();
+  const mobile = useMediaQuery(theme.breakpoints.only("xs"));
+  const tablet = useMediaQuery(theme.breakpoints.down("md"));
+
+  useEffect(() => {
+    if (mobile) setDeviceType("mobile");
+    else if (tablet) setDeviceType("tablet");
+    else setDeviceType("pc");
+  }, [mobile, tablet]);
+
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 2,
-    slidesToScroll: 2,
+    slidesToShow: deviceType === "mobile" ? 1 : (deviceType === "tablet" ? 1 : 2),
+    slidesToScroll: deviceType === "mobile" ? 1 : (deviceType === "tablet" ? 1 : 2),
     autoplay: true,
-    autoplaySpeed: 120000, // 2 minutes
+    autoplaySpeed: 120000,
     arrows: true,
     pauseOnHover: true,
-    cssEase: 'ease-in-out',
-    responsive: [
-      {
-        breakpoint: 960, // md breakpoint
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-    appendDots: (dots: React.ReactNode) => (
-      <Box sx={{ mt: 2, '& ul': { display: 'flex', justifyContent: 'center', gap: 1 } }}>
-        {dots}
-      </Box>
-    ),
+    cssEase: "ease-in-out",
+    appendDots: (dots: React.ReactNode) => <Box sx={{ mt: 2, '& ul': { display: 'flex', justifyContent: 'center', gap: 1 } }}>{dots}</Box>,
     customPaging: () => (
-      <Box
-        sx={{
-          width: 12,
-          height: 12,
-          bgcolor: 'primary.main',
-          borderRadius: '50%',
-          cursor: 'pointer',
-          '&.slick-active': { bgcolor: 'primary.dark' },
-        }}
-      />
+      <Box sx={{ width: 12, height: 12, bgcolor: 'primary.main', borderRadius: '50%', cursor: 'pointer', '&.slick-active': { bgcolor: 'primary.dark' } }} />
     ),
   };
 
   return (
-    <Box sx={{ py: 8, bgcolor: 'secondary.main' }} id="testimonials">
+    <Box sx={{ py: deviceType === "mobile" ? 4 : 8, bgcolor: "secondary.main" }} id="testimonials">
       <Container>
-        <Typography
-          mt={8}
-          variant="h2"
-          align="center"
-          gutterBottom
-          sx={{
-            fontWeight: 'bold',
-            color: 'primary.main',
-            textShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-          }}
-        >
-          What Parents Say
-        </Typography>
-        <Box sx={{ maxWidth: '1200px', mx: 'auto', px: { xs: 2, md: 0 } }}>
+        <Box textAlign="center" px={deviceType === "mobile" ? 0 : 2} mb={deviceType === "mobile" ? 2 : 4}>
+          <Typography
+            variant="h2"
+            fontSize={deviceType === "mobile" ? 24 : (deviceType === "tablet" ? 32 : 48)}
+            fontWeight={900}
+            color="#1976d2"
+            paddingBottom={deviceType === "mobile" ? 1 : 2}
+          >
+            What Parents Say
+          </Typography>
+          <hr style={{ width: deviceType === "mobile" ? "30%" : "20%", border: "1px solid #1976d2" }} />
+        </Box>
+        <Box sx={{ maxWidth: "1200px", mx: "auto", px: { xs: 2, md: 0 } }}>
           <Slider {...settings}>
             {testimonials.map((testimonial, index) => (
-              <Box key={index} sx={{ px: 2 }}>
+              <Box key={index} sx={{ px: deviceType === "mobile" ? 1 : 2 }}>
                 <Card
                   sx={{
-                    maxWidth: '500px',
-                    mx: 'auto',
-                    bgcolor: 'white',
+                    maxWidth: "500px",
+                    mx: "auto",
+                    bgcolor: "white",
                     borderRadius: 3,
-                    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.15)',
-                    border: '1px solid',
-                    borderColor: 'primary.light',
-                    transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
-                    animation: 'fadeIn 0.5s ease-in-out',
-                    '&:hover': {
-                      transform: 'scale(1.03)',
-                      boxShadow: '0 12px 32px rgba(0, 0, 0, 0.2)',
-                    },
-                    minHeight: '400px',
+                    boxShadow: "0 8px 24px rgba(0, 0, 0, 0.15)",
+                    border: "1px solid",
+                    borderColor: "primary.light",
+                    transition: "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
+                    animation: "fadeIn 0.5s ease-in-out",
+                    "&:hover": { transform: "scale(1.03)", boxShadow: "0 12px 32px rgba(0, 0, 0, 0.2)" },
+                    minHeight: deviceType === "mobile" ? "300px" : "300px",
                   }}
                 >
-                  <CardContent sx={{ textAlign: 'center', py: 5, px: 3 }}>
-                    <Avatar
-                      src={testimonial.avatar}
-                      alt={testimonial.name}
-                      sx={{ width: 80, height: 80, mx: 'auto', mb: 2 }}
-                    />
-                    <Typography variant="body1" sx={{ mb: 2, color: 'text.secondary', lineHeight: 1.6 }}>
-                      "{testimonial.text}"
+                  <CardContent sx={{ textAlign: "center", py: deviceType === "mobile" ? 2 : 5, px: deviceType === "mobile" ? 1 : 3 }}>
+                    <Avatar src={testimonial.avatar} alt={testimonial.name} sx={{ width: 60, height: 60, mx: "auto", mb: 1 }} />
+                    <Typography variant="body1" sx={{ mb: 1, color: "text.secondary", lineHeight: 1.5, fontSize: deviceType === "mobile" ? "0.9rem" : "1rem" }}>
+                      "{testimonial.text.slice(0, deviceType === "mobile" ? 150 : 300)}..."
                     </Typography>
-                    <Typography variant="subtitle1" sx={{ fontWeight: 'bold', color: 'primary.main' }}>
+                    <Typography variant="subtitle1" sx={{ fontWeight: "bold", color: "primary.main" }}>
                       - {testimonial.name}
                     </Typography>
                   </CardContent>
