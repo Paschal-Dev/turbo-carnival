@@ -1,5 +1,5 @@
-import { Box, Typography, Button, Container, useMediaQuery, useTheme } from '@mui/material';
-import heroBg from '../assets/images/hero_bg.png';
+import { Box, Container, Typography, Button, useTheme, useMediaQuery } from '@mui/material';
+import heroImage from '../assets/images/hero_bg.png';
 
 const Hero = () => {
   const theme = useTheme();
@@ -8,25 +8,59 @@ const Hero = () => {
   return (
     <Box
       sx={{
-        backgroundImage: `url(${heroBg})`,
+        height: mobile ? '60vh' : '100vh',
+        backgroundImage: `url(${heroImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        minHeight: mobile ? '50vh' : '80vh',
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'center',
         textAlign: 'center',
-        color: '#fff',
+        color: 'white',
+        position: 'relative',
+        '&::before': {
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          zIndex: 1,
+        },
       }}
     >
-      <Container>
-        <Typography variant="h1" gutterBottom sx={{ fontSize: mobile ? '2rem' : '3rem' }}>
+      <Container sx={{ position: 'relative', zIndex: 2 }}>
+        <Typography
+          variant="h1"
+          sx={{
+            fontSize: mobile ? '2rem' : '4rem',
+            fontWeight: 900,
+            mb: 2,
+            textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
+          }}
+        >
           Welcome to Gold Stream Academy
         </Typography>
-        <Typography variant="h5" sx={{ mb: mobile ? 2 : 3, fontSize: mobile ? '1rem' : '1.5rem' }}>
-          Empowering the next generation with quality education
+        <Typography
+          variant="h5"
+          sx={{
+            mb: 4,
+            fontSize: mobile ? '1rem' : '1.5rem',
+            textShadow: '1px 1px 3px rgba(0,0,0,0.5)',
+          }}
+        >
+          Empowering Young Minds Through Education and Sports
         </Typography>
-        <Button variant="contained" color="primary" size={mobile ? "small" : "large"}>
-          Enroll Now
+        <Button
+          variant="contained"
+          color="secondary"
+          size="large"
+          sx={{ fontSize: mobile ? '0.9rem' : '1rem', px: mobile ? 3 : 4 }}
+          component="a"
+          href="#contact"
+        >
+          Get in Touch
         </Button>
       </Container>
     </Box>

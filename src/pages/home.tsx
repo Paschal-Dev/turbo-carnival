@@ -1,40 +1,40 @@
-// src/pages/Home.tsx
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Box } from '@mui/material';
 import Header from '../components/header';
 import Hero from '../components/hero';
 import About from '../components/about';
 import Programs from '../components/program';
+import EventsSection from '../components/events/eventSection';
+import BlogSection from '../components/blog/blogSection';
+import YouTubeFeed from '../components/social/youtubeFeed';
 import Testimonials from '../components/testimonial';
 import Contact from '../components/contact';
+import MilestonesTable from '../components/progress/milestoneTable';
 import Footer from '../components/footer';
-import { Box } from '@mui/material';
 
 const Home = () => {
-  const { hash } = useLocation();
-
-  useEffect(() => {
-    if (hash) {
-      const element = document.getElementById(hash.replace('#', ''));
-      if (element) {
-        const offset = 80;
-        const y = element.getBoundingClientRect().top + window.pageYOffset - offset;
-        window.scrollTo({ top: y, behavior: 'smooth' });
-      }
-    } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  }, [hash]);
-
   return (
     <Box sx={{ mt: '80px' }}>
       <Header />
-      <Hero />
+      <div id="home">
+        <Hero />
+      </div>
       <div id="about">
         <About />
       </div>
       <div id="programs">
         <Programs />
+      </div>
+      <div id="events">
+        <EventsSection />
+      </div>
+      <div id="blog">
+        <BlogSection />
+      </div>
+      <div id="youtube">
+        <YouTubeFeed />
+      </div>
+      <div id="milestones">
+        <MilestonesTable />
       </div>
       <div id="testimonials">
         <Testimonials />
@@ -42,7 +42,9 @@ const Home = () => {
       <div id="contact">
         <Contact />
       </div>
-      <Footer />
+      <div>
+        <Footer />
+      </div>
     </Box>
   );
 };
