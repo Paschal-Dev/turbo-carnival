@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Typography, Box, Container, useTheme, useMediaQuery } from '@mui/material';
+import { Typography, Box, Container, useTheme, useMediaQuery, Button } from '@mui/material';
 import YouTube from 'react-youtube';
 
 const YouTubeFeed = () => {
@@ -16,6 +16,10 @@ const YouTubeFeed = () => {
       modestbranding: 1, // Minimize YouTube branding
       rel: 0, // Disable related videos at the end
     },
+  };
+
+  const handleSeeMoreClick = () => {
+    window.open('https://www.youtube.com/@YourSchoolChannel', '_blank'); // Replace with your YouTube channel/playlist URL
   };
 
   return (
@@ -46,6 +50,22 @@ const YouTubeFeed = () => {
           }}
         >
           <YouTube videoId={videoId} opts={opts} />
+        </Box>
+        <Box sx={{ mt: mobile ? 2 : 4, textAlign: 'center' }}>
+          <Button
+            variant="outlined"
+            color="primary"
+            size="large"
+            sx={{
+              px: 4,
+              fontWeight: 'bold',
+              borderColor: 'secondary.main',
+              fontSize: mobile ? '0.9rem' : '1rem',
+            }}
+            onClick={handleSeeMoreClick}
+          >
+            See More Videos
+          </Button>
         </Box>
       </Container>
     </Box>

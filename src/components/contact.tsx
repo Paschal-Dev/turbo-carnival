@@ -1,27 +1,49 @@
 import { useState } from 'react';
-import { Typography, Box, Container, TextField, Button, useTheme, useMediaQuery } from '@mui/material';
-import { Email, Phone, LocationOn } from '@mui/icons-material';
-import YouTube from 'react-youtube';
+import { Typography, Box, Container, TextField, Button, useTheme, useMediaQuery, Alert } from '@mui/material';
+import { Email, Phone, YouTube} from '@mui/icons-material';
 
 const Contact = () => {
   const theme = useTheme();
-  const mobile = useMediaQuery(theme.breakpoints.only('xs'));
-  const [videoId] = useState('8z5Sjsj2l0Y'); // Video of kids in soccer training
+  const mobile = useMediaQuery(theme.breakpoints.only('xs')); // Kids' soccer training video
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: '',
+  });
+  const [submissionStatus, setSubmissionStatus] = useState<'success' | 'error' | null>(null);
+  const [submissionMessage, setSubmissionMessage] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Form submitted');
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const videoOpts = {
-    height: mobile ? '200' : '390',
-    width: '100%',
-    playerVars: {
-      autoplay: 0, // Disable autoplay for school-safe usage
-      controls: 1, // Show player controls
-      modestbranding: 1, // Minimize YouTube branding
-      rel: 0, // Disable related videos at the end
-    },
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('https://formspree.io/f/xblkwkkw', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
+        }),
+      });
+      if (response.ok) {
+        setSubmissionStatus('success');
+        setSubmissionMessage('Your message has been sent successfully!');
+        setFormData({ name: '', email: '', phone: '', message: '' }); // Clear form
+      } else {
+        setSubmissionStatus('error');
+        setSubmissionMessage('Failed to send message. Please try again.');
+      }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      setSubmissionStatus('error');
+      setSubmissionMessage('An error occurred. Please try again later.');
+    }
   };
 
   return (
@@ -30,9 +52,9 @@ const Contact = () => {
         <Typography
           variant="h2"
           align="center"
-          mt={mobile ? 4 : 4}
           gutterBottom
           sx={{
+            mt: mobile ? 4 : 4,
             mb: mobile ? 4 : 6,
             color: 'primary.main',
             fontSize: mobile ? '1.5rem' : '2.5rem',
@@ -43,12 +65,9 @@ const Contact = () => {
         <Box
           sx={{
             display: 'grid',
-            gridTemplateColumns: {
-              xs: '1fr', // 1 column on mobile
-              md: 'repeat(2, 1fr)', // 2 columns on medium and larger
-            },
-            gap: mobile ? 2 : 4, // Replaces Grid's spacing
-            alignItems: 'stretch', // Ensure sections are equal height
+            gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)' },
+            gap: mobile ? 2 : 4,
+            alignItems: 'stretch',
           }}
         >
           <Box sx={{ mb: mobile ? 2 : 4 }}>
@@ -68,20 +87,34 @@ const Contact = () => {
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
               <Phone sx={{ mr: 1, color: 'primary.main' }} />
               <Typography variant="body1" sx={{ fontSize: mobile ? '0.9rem' : '1rem' }}>
-                +1 (555) 123-4567
+                +234 (0) 706 995 5905
+              </Typography>
+            </Box>
+            <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+              <Phone sx={{ mr: 1, color: 'primary.main' }} />
+              <Typography variant="body1" sx={{ fontSize: mobile ? '0.9rem' : '1rem' }}>
+                +234 (0) 912 461 5884
               </Typography>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <LocationOn sx={{ mr: 1, color: 'primary.main' }} />
+              <YouTube sx={{ mr: 1, color: 'primary.main' }} />
               <Typography variant="body1" sx={{ fontSize: mobile ? '0.9rem' : '1rem' }}>
                 123 Gold Stream Ave, City, Country
               </Typography>
             </Box>
           </Box>
           <Box component="form" onSubmit={handleSubmit}>
+            {submissionStatus && (
+              <Alert severity={submissionStatus} sx={{ mb: 2 }}>
+                {submissionMessage}
+              </Alert>
+            )}
             <TextField
               fullWidth
               label="Name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
               margin="normal"
               required
               sx={{ mb: mobile ? 1 : 2 }}
@@ -89,7 +122,21 @@ const Contact = () => {
             <TextField
               fullWidth
               label="Email"
+              name="email"
               type="email"
+              value={formData.email}
+              onChange={handleChange}
+              margin="normal"
+              required
+              sx={{ mb: mobile ? 1 : 2 }}
+            />
+            <TextField
+              fullWidth
+              label="Phone Number"
+              name="phone"
+              type="tel"
+              value={formData.phone}
+              onChange={handleChange}
               margin="normal"
               required
               sx={{ mb: mobile ? 1 : 2 }}
@@ -97,8 +144,11 @@ const Contact = () => {
             <TextField
               fullWidth
               label="Message"
+              name="message"
               multiline
               rows={4}
+              value={formData.message}
+              onChange={handleChange}
               margin="normal"
               required
               sx={{ mb: mobile ? 1 : 2 }}
@@ -116,40 +166,6 @@ const Contact = () => {
               Send Message
             </Button>
           </Box>
-        </Box>
-        <Box sx={{ mt: mobile ? 4 : 6 }}>
-          <Typography
-            variant="h2"
-            align="center"
-            gutterBottom
-            sx={{
-              mb: mobile ? 4 : 6,
-              color: 'primary.main',
-              fontSize: mobile ? '1.5rem' : '2.5rem',
-            }}
-          >
-            See Our Students in Action
-          </Typography>
-          <Box
-            sx={{
-              borderRadius: 2,
-              overflow: 'hidden',
-              boxShadow: 3,
-              maxWidth: mobile ? '100%' : 800,
-              mx: 'auto',
-              border: '1px solid',
-              borderColor: 'primary.main',
-            }}
-          >
-            <YouTube videoId={videoId} opts={videoOpts} />
-          </Box>
-          <Typography
-            variant="body2"
-            color="text.secondary"
-            sx={{ mt: 2, textAlign: 'center', fontSize: mobile ? '0.9rem' : '1rem' }}
-          >
-            Watch our students during a soccer training session!
-          </Typography>
         </Box>
       </Container>
     </Box>
