@@ -28,7 +28,7 @@ const Preloader = () => {
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          zIndex: 9999,
+          zIndex: 10000, // Higher than advertisement overlay
           color: '#fff',
         }}
       >

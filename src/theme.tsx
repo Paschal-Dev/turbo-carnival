@@ -3,7 +3,7 @@ import { createTheme } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#D4A017', // Gold
+      main: '#B22222', // Gold
       contrastText: '#000000', // Black for contrast
     },
     secondary: {
@@ -33,10 +33,10 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: '"Poppins", "Roboto", sans-serif',
-    h1: { fontWeight: 700, color: '#D4A017' },
-    h2: { fontWeight: 700, color: '#D4A017' },
-    h3: { fontWeight: 600, color: '#D4A017' },
-    h4: { fontWeight: 600, color: '#D4A017' },
+    h1: { fontWeight: 700, color: '#B22222' },
+    h2: { fontWeight: 700, color: '#B22222' },
+    h3: { fontWeight: 600, color: '#B22222' },
+    h4: { fontWeight: 600, color: '#B22222' },
     body1: { fontSize: '1rem', color: '#000000' },
     body2: { fontSize: '0.9rem', color: '#4A4A4A' },
   },

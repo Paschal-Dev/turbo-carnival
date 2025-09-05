@@ -1,3 +1,6 @@
+import flyer from '../assets/images/olympiad-flyer.jpg';
+
+
 export const posts = [
   {
     id: '1',
@@ -57,6 +60,16 @@ export const posts = [
     date: '2024-08-01',
     category: 'Science',
     readTime: '3 min read',
+    featured: true,
+  },
+    {
+    id: '7',
+    title: 'Gold Stream Olympiad 2025: Primary Schools Sports and Artistic Talents Competition',
+    excerpt: 'Primary schools across Nigeria are invited to participate in the inaugural Gold Stream Olympiad, featuring sports and arts competitions with grant opportunities for winning schools.',
+    image: flyer, // Use your flyer image
+    date: '2025-10-27',
+    category: 'Events',
+    readTime: '4 min read',
     featured: true,
   },
 ];

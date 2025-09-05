@@ -1,13 +1,26 @@
 import { useState } from 'react';
 import { Box, Container, Typography, Card, CardContent, CardMedia, Button, Chip, useTheme, useMediaQuery } from '@mui/material';
 import { CalendarMonth, SportsSoccer, School, MusicNote, Science, CheckCircle, EventAvailable, EventBusy } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { events, type Event } from '../../data/events';
+import RegistrationForm from '../../data/register';
 
 const EventsSection = () => {
   const theme = useTheme();
   const mobile = useMediaQuery(theme.breakpoints.only('xs'));
   const [eventList] = useState<Event[]>(events);
+  const [registrationOpen, setRegistrationOpen] = useState(false);
+  const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
+
+  const handleRegisterClick = (eventId: string) => {
+    setSelectedEventId(eventId);
+    setRegistrationOpen(true);
+  };
+
+  const handleCloseRegistration = () => {
+    setRegistrationOpen(false);
+    setSelectedEventId(null);
+  };
 
   const getStatusChip = (status: string) => {
     switch (status) {
@@ -158,8 +171,7 @@ const EventsSection = () => {
                     variant={event.status === 'upcoming' ? 'contained' : 'outlined'}
                     color="primary"
                     disabled={event.status === 'completed'}
-                    component={Link}
-                    to={`/register/${event.id}?title=${encodeURIComponent(event.title)}`}
+                    onClick={() => event.status !== 'completed' && handleRegisterClick(event.id)}
                     sx={{
                       textTransform: 'none',
                       fontSize: mobile ? '0.8rem' : '0.9rem',
@@ -182,6 +194,12 @@ const EventsSection = () => {
             </Box>
           ))}
         </Box>
+        {/* Registration Form Dialog */}
+        <RegistrationForm
+          open={registrationOpen}
+          onClose={handleCloseRegistration}
+          eventId={selectedEventId}
+        />
       </Container>
     </Box>
   );

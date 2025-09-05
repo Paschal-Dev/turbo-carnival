@@ -31,17 +31,29 @@ const Hero = () => {
       }}
     >
       <Container sx={{ position: 'relative', zIndex: 2 }}>
-        <Typography
-          variant="h1"
-          sx={{
-            fontSize: mobile ? '2rem' : '4rem',
-            fontWeight: 900,
-            mb: 2,
-            textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
-          }}
-        >
-          Welcome to Gold Stream Academy
-        </Typography>
+        <Box sx={{ mb: 2 }}>
+          <Typography
+            variant="h2"
+            sx={{
+              fontSize: mobile ? '2.5rem' : '3.5rem',
+              fontWeight: 600,
+              textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
+            }}
+          >
+            WELCOME TO
+          </Typography>
+          <Typography
+            variant="h1"
+            sx={{
+              fontSize: mobile ? '2.5rem' : '3.5rem',
+              fontWeight: 900,
+              textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
+              lineHeight: 1.1,
+            }}
+          >
+            GOLD STREAM ACADEMY
+          </Typography>
+        </Box>
         <Typography
           variant="h5"
           sx={{
@@ -50,7 +62,7 @@ const Hero = () => {
             textShadow: '1px 1px 3px rgba(0,0,0,0.5)',
           }}
         >
-          Empowering Young Minds Through Education and Sports
+          Cutting edge talent refinement from grassroots to greatness.
         </Typography>
         <Button
           variant="contained"

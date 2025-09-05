@@ -87,13 +87,13 @@ const Contact = () => {
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
               <Phone sx={{ mr: 1, color: 'primary.main' }} />
               <Typography variant="body1" sx={{ fontSize: mobile ? '0.9rem' : '1rem' }}>
-                +234 (0) 706 995 5905
+                +234 91600009598
               </Typography>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
               <Phone sx={{ mr: 1, color: 'primary.main' }} />
               <Typography variant="body1" sx={{ fontSize: mobile ? '0.9rem' : '1rem' }}>
-                +234 (0) 912 461 5884
+                +234 9013612454
               </Typography>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>

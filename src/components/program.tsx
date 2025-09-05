@@ -6,26 +6,27 @@ const Programs = () => {
   const mobile = useMediaQuery(theme.breakpoints.only('xs'));
 
   const programs = [
+    
     {
-      title: 'Academic Excellence',
-      description: 'Our curriculum emphasizes critical thinking and innovation...',
-      icon: <School sx={{ fontSize: mobile ? 40 : 60, color: 'primary.main' }} />,
-    },
-    {
-      title: 'Sports Programs',
+      title: 'SPORTS',
       description: 'From soccer to basketball, we foster teamwork and discipline...',
       icon: <SportsSoccer sx={{ fontSize: mobile ? 40 : 60, color: 'primary.main' }} />,
     },
     {
-      title: 'Arts & Culture',
+      title: 'ARTS',
       description: 'Explore creativity through music, art, and drama...',
       icon: <Palette sx={{ fontSize: mobile ? 40 : 60, color: 'primary.main' }} />,
     },
     {
-      title: 'STEM Initiatives',
+      title: 'APPLIED SCIENCE',
       description: 'Hands-on science and technology programs...',
       icon: <Science sx={{ fontSize: mobile ? 40 : 60, color: 'primary.main' }} />,
     },
+    {
+      title: 'ACADEMICS',
+      description: 'Our curriculum emphasizes critical thinking and innovation...',
+      icon: <School sx={{ fontSize: mobile ? 40 : 60, color: 'primary.main' }} />,
+    }
   ];
 
   return (
@@ -38,7 +39,7 @@ const Programs = () => {
           mt={mobile ? 4 : 4}
           sx={{ mb: mobile ? 4 : 6, color: 'primary.main', fontSize: mobile ? '1.5rem' : '2.5rem' }}
         >
-          Our Programs
+          CO-CURRICULAR STREAMS 
         </Typography>
         <Box
           sx={{

@@ -1,3 +1,6 @@
+import banner from '../assets/olympiad-banner.jpg';
+
+
 export interface Event {
   id: string;
   title: string;
@@ -55,5 +58,16 @@ export const events: Event[] = [
     status: 'completed',
     call: 'Submit artwork by June 25', // Added call
     highlights: 'Over 50 student artworks displayed!',
+  },
+   {
+    id: '5',
+    title: 'Gold Stream Olympiad',
+    description: 'Students from different schools represents their schools on different activities.',
+    image: banner, // Olympiad banner image
+    date: '2025-10-27',
+    category: 'School',
+    status: 'upcoming',
+    registration: 'Registration ends Oct 15',
+    deadline: 'October 15, 2025', // Added deadline
   },
 ];
