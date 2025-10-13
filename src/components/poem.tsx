@@ -41,7 +41,7 @@ export default function Poem() {
         borderRadius: "10px",
         border: "1px solid",
         borderColor: "primary.main",
-        width: deviceType === "mobile" ? "100%" : "75%",
+        width: deviceType === "mobile" ? "100%" : "80%",
         mx: "auto",
         overflow: "hidden",
       }}
