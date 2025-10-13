@@ -37,11 +37,6 @@ export default function Poem() {
         p: deviceType === "mobile" ? 2 : 4,
         position: "relative",
         textAlign: "center",
-        backgroundColor: "background.paper",
-        borderRadius: "10px",
-        border: "1px solid",
-        borderColor: "primary.main",
-        width: deviceType === "mobile" ? "100%" : "80%",
         mx: "auto",
         overflow: "hidden",
       }}
@@ -53,11 +48,12 @@ export default function Poem() {
         alt="spear left"
         sx={{
           position: "absolute",
-          left: 120,
+          left: deviceType === "mobile" ? 20 : 150,
           top: 0,
           height: "100%", // make the spear stretch full height if desired
           objectFit: "contain",
           pointerEvents: "none",
+          // display: { xs: "none", md: "block" },
         }}
       />
       {/* Right spear */}
@@ -67,11 +63,12 @@ export default function Poem() {
         alt="spear right"
         sx={{
           position: "absolute",
-          right: 120,
+          right: deviceType === "mobile" ? 20 : 150,
           top: 0,
           height: "100%",
           objectFit: "contain",
           pointerEvents: "none",
+          // display: { xs: "none", md: "block" },
         }}
       />
 
@@ -89,7 +86,7 @@ export default function Poem() {
           zIndex: 1, // bring above spear images if needed
           fontSize:
             deviceType === "mobile"
-              ? "14px"
+              ? "8px"
               : deviceType === "tablet"
               ? "18px"
               : "24px",
