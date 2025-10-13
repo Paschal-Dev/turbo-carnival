@@ -195,7 +195,7 @@ const GoldStreamFoundation = () => {
                   }
                 }}
               >
-                We visit orphanages and vulnerable communities, identify talents and then set up training infrastructure and equipment, as well as human resources (coaches, counsellors and mentors) towards the training of the discovered assets....
+                We visit orphanages and vulnerable communities, identify talents and then set up training infrastructure and equipment, as well as human resources (coaches, counsellors and mentors) towards the training of the discovered assets.  This is ongoing and two orphanages have been activated till date, with about 38 assets in training, made up of 36 footballers and 2 basketballers. 
               </Typography>
               
               <Box

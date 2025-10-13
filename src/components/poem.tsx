@@ -1,68 +1,108 @@
 import { Typography } from "@mui/material";
 import { Box, useMediaQuery, useTheme } from "@mui/system";
 import { useState, useEffect } from "react";
+import spear from "../assets/images/spear.png";
+
+// Assuming you have imported your custom font via CSS or @font-face already
+// e.g. in your global styles:
+// @font-face {
+//   font-family: "YourCustomFont";
+//   src: url("/fonts/YourCustomFont.woff2") format("woff2"), …;
+// }
 
 export default function Poem() {
-      const [deviceType, setDeviceType] = useState("mobile");
-      const theme = useTheme();
-      const mobile = useMediaQuery(theme.breakpoints.only("xs"));
-      const tablet = useMediaQuery(theme.breakpoints.down("md"));
-    
-      useEffect(() => {
-        if (mobile) setDeviceType("mobile");
-        else if (tablet) setDeviceType("tablet");
-        else setDeviceType("pc");
-      }, [mobile, tablet]);
-      
- const poem = `
-    IN THE BIRTHPLACE OF GODS, WE SOJOURN
-    OF CHARACTER, VIRTUE AND DOMINION, ONLY EAGLES DARE
-    MOUNTAINS ABOUND, BUT VICTORY, SAVOUR OF THE BRAVE
-    REFINED FOR GREATNESS, STAND FAST, FOR YE ARE GODS
-  `;
+  const [deviceType, setDeviceType] = useState("mobile");
+  const theme = useTheme();
+  const mobile = useMediaQuery(theme.breakpoints.only("xs"));
+  const tablet = useMediaQuery(theme.breakpoints.down("md"));
+
+  useEffect(() => {
+    if (mobile) setDeviceType("mobile");
+    else if (tablet) setDeviceType("tablet");
+    else setDeviceType("pc");
+  }, [mobile, tablet]);
+
+  // Use <br> to control line breaks explicitly, will let us manage vertical spacing too
+  const poemLines = [
+    "IN THE BIRTHPLACE OF GODS, WE SOJOURN",
+    "OF CHARACTER, VIRTUE AND DOMINION, ONLY EAGLES DARE",
+    "MOUNTAINS ABOUND, BUT VICTORY, SAVOUR OF THE BRAVE",
+    "REFINED FOR GREATNESS, STAND FAST, FOR YE ARE GODS",
+  ];
 
   return (
     <Box
       sx={{
         mt: deviceType === "mobile" ? 2 : 4,
         p: deviceType === "mobile" ? 2 : 4,
+        position: "relative",
         textAlign: "center",
         backgroundColor: "background.paper",
         borderRadius: "10px",
         border: "1px solid",
         borderColor: "primary.main",
-        width: deviceType === "mobile" ? "100%" : "90%",
+        width: deviceType === "mobile" ? "100%" : "75%",
         mx: "auto",
+        overflow: "hidden",
       }}
     >
+      {/* Left spear */}
+      <Box
+        component="img"
+        src={spear}
+        alt="spear left"
+        sx={{
+          position: "absolute",
+          left: 120,
+          top: 0,
+          height: "100%", // make the spear stretch full height if desired
+          objectFit: "contain",
+          pointerEvents: "none",
+        }}
+      />
+      {/* Right spear */}
+      <Box
+        component="img"
+        src={spear}
+        alt="spear right"
+        sx={{
+          position: "absolute",
+          right: 120,
+          top: 0,
+          height: "100%",
+          objectFit: "contain",
+          pointerEvents: "none",
+        }}
+      />
+
       <Typography
         variant="body1"
         color="#D4A017"
-        fontSize={
-          deviceType === "mobile" ? 14 : deviceType === "tablet" ? 18 : 24
-        }
+        // Use your custom font here
         sx={{
+          fontFamily: `"YourCustomFont", sans-serif`,
           fontWeight: 700,
-          lineHeight: 1.2,
-          letterSpacing: "0.1em",
           textTransform: "uppercase",
+          letterSpacing: "0.1em",
+          lineHeight: 1.5, // adjust spacing between lines
           position: "relative",
-          "&:before, &:after": {
-            content: '""',
-            position: "absolute",
-            top: "50%",
-            width: "20%",
-            height: "2px",
-            background: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="200"><path d="M10 0 L10 200" fill="none" stroke="%23${theme.palette.primary.main.slice(
-              1
-            )}" stroke-width="2"/></svg>') no-repeat center`,
-            transform: "translateY(-50%)",
-          },
-          "&:before": { left: 0 },
-          "&:after": { right: 0 },
+          zIndex: 1, // bring above spear images if needed
+          fontSize:
+            deviceType === "mobile"
+              ? "14px"
+              : deviceType === "tablet"
+              ? "18px"
+              : "24px",
         }}
-        dangerouslySetInnerHTML={{ __html: poem.replace(/\n/g, "<br />") }}
-      />
+      >
+        {poemLines.map((line, idx) => (
+          <span key={idx}>
+            {line}
+            {idx < poemLines.length - 1 && <br />}
+            {/* Add extra spacing via margin if needed */}
+          </span>
+        ))}
+      </Typography>
     </Box>
   );
 }

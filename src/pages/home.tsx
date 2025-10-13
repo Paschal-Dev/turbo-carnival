@@ -5,7 +5,6 @@ import About from "../components/about";
 import Programs from "../components/program";
 import EventsSection from "../components/events/eventSection";
 import BlogSection from "../components/blog/blogSection";
-import YouTubeFeed from "../components/social/youtubeFeed";
 import Testimonials from "../components/testimonial";
 import Contact from "../components/contact";
 import MilestonesTable from "../components/progress/milestoneTable";
@@ -14,6 +13,7 @@ import Poem from "../components/poem";
 import SchoolBoard from "../components/schoolBoard";
 import GoldStreamFoundation from "../components/info.";
 import AdvertisementOverlay from "../components/ads";
+import MediaGallery from "../components/social/youtubeFeed";
 
 const Home = () => {
   return (
@@ -39,21 +39,20 @@ const Home = () => {
       <div>
         <SchoolBoard />
       </div>
-
-      <div id="youtube">
-        <YouTubeFeed />
-      </div>
       <div id="testimonials">
         <Testimonials />
+      </div>
+      <div id="blog">
+        <BlogSection />
+      </div>
+      <div id="youtube">
+        <MediaGallery />
       </div>
       <div>
         <GoldStreamFoundation />
       </div>
       <div id="contact">
         <Contact />
-      </div>
-      <div id="blog">
-        <BlogSection />
       </div>
       <div>
         <Footer />

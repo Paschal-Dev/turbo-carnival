@@ -104,32 +104,28 @@ const Header = () => {
       <Container maxWidth="lg">
         <Toolbar sx={{ 
           justifyContent: 'space-between', 
-          alignItems: 'flex-start',
+          alignItems: 'flex-end',   // Align logo & categories at bottom
           py: 1,
           minHeight: { xs: '70px', md: '90px' } 
         }}>
           {/* Logo */}
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
             <img 
               src={logo} 
               alt="Gold Stream Academy" 
               style={{ 
-                height: mobile ? '60px' : '100px',
+                height: mobile ? '70px' : '140px', // Bigger logo
                 marginRight: mobile ? '10px' : '30px'
               }} 
             />
           </Box>
 
-          {/* Right section with categories and menu in the same line */}
-          <Box sx={{ 
-            display: 'flex', 
-            alignItems: 'center',
-            mt: 1
-          }}>
-            {/* Category Links as Plain Text - Appear on scroll */}
+          {/* Right section with categories and menu */}
+          <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+            {/* Category Links - only show when scrolled */}
             <Box sx={{ 
               display: scrolled ? { xs: 'none', md: 'flex' } : 'none', 
-              gap: { md: 2, lg: 3 },
+              gap: { md: 4, lg: 6 },
               mr: 2,
               transition: 'opacity 0.3s ease',
               opacity: scrolled ? 1 : 0
@@ -138,10 +134,10 @@ const Header = () => {
                 <Typography
                   key={link.text}
                   sx={{
-                    fontSize: { md: '0.8rem', lg: '0.9rem' },
+                    fontSize: { md: '0.9rem', lg: '1rem' },
                     fontWeight: 700,
                     textTransform: 'uppercase',
-                    color: '#B22222',
+                    color: 'black',   // black text
                     cursor: 'default',
                   }}
                 >
@@ -150,7 +146,7 @@ const Header = () => {
               ))}
             </Box>
 
-            {/* Hamburger menu button with animation */}
+            {/* Hamburger menu button */}
             <IconButton
               color="inherit"
               onClick={toggleDrawer(true)}
@@ -167,7 +163,7 @@ const Header = () => {
             </IconButton>
           </Box>
 
-          {/* Slide-in drawer from the right for both desktop and mobile */}
+          {/* Slide-in drawer for mobile */}
           <SwipeableDrawer
             anchor="right"
             open={drawerOpen}
