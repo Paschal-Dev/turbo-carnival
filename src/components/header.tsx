@@ -114,7 +114,7 @@ const Header = () => {
               src={logo} 
               alt="Gold Stream Academy" 
               style={{ 
-                height: mobile ? '70px' : '140px', // Bigger logo
+                height: mobile ? '70px' : '150px', // Bigger logo
                 marginRight: mobile ? '10px' : '30px'
               }} 
             />

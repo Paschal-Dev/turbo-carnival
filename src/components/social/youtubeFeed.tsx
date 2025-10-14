@@ -10,10 +10,10 @@ import {
 } from "@mui/material";
 import YouTube from "react-youtube";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
-import one from "../../assets/images/sport1.avif";
-import two from "../../assets/images/sport2.avif";
-import three from "../../assets/images/sport3.jpg";
-import four from "../../assets/images/sport4.avif";
+import one from "../../assets/images/new1.webp";
+import two from "../../assets/images/new2.jpg";
+import three from "../../assets/images/new3.avif";
+import four from "../../assets/images/new4.jpg";
 
 const MediaGallery = () => {
   const theme = useTheme();
@@ -24,11 +24,11 @@ const MediaGallery = () => {
 
   // Sample YouTube video IDs (replace with your actual ones)
   const videoIds = [
-    "8z5Sjsj2l0Y",
-    "dQw4w9WgXcQ",
-    "jNQXAC9IVRw",
-    "8UVNT4wvIGY",
-    "9bZkp7q19f0",
+    "OCMRRp8wb00",
+    "sZzXZRiqvIs",
+    "HdF7duaiW50",
+    "LP0vl92xaik",
+    "hFU2l8uYRTA",
   ];
 
   // Sample still picture URLs (replace with real paths or links)

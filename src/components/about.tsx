@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { Box, Container, Typography, useMediaQuery, useTheme } from "@mui/material";
+import {
+  Box,
+  Container,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 
 export default function About() {
   const [deviceType, setDeviceType] = useState("mobile");
@@ -47,7 +53,7 @@ export default function About() {
         </Box>
       </Container>
 
-           {/* Staircase Boxes Section */}
+      {/* Staircase Boxes Section */}
       <Box
         sx={{
           display: "flex",
@@ -63,8 +69,10 @@ export default function About() {
         {/* Left Box - Top Step */}
         <Box
           sx={{
-            backgroundColor: "background.paper",
-            border: "2px solid",
+            backgroundColor: "rgba(0, 0, 0, 0.85)",
+            backgroundImage:
+              "linear-gradient(45deg, rgba(0, 0, 0, 0.9) 0%, rgba(20, 20, 20, 0.9) 100%)",
+            border: "3px solid",
             borderColor: "primary.main",
             borderRadius: "8px",
             p: deviceType === "mobile" ? 2 : 3,
@@ -80,18 +88,21 @@ export default function About() {
             sx={{
               fontSize: deviceType === "mobile" ? "0.9rem" : "1rem",
               lineHeight: 1.6,
-              color: "text.primary",
+              color: "rgba(255, 255, 255, 0.9)",
             }}
           >
-            We are a core multi-skill innovative secondary school in Lagos, Nigeria…
+            We are a core multi-skill innovative secondary school in Lagos,
+            Nigeria…
           </Typography>
         </Box>
 
         {/* Right Box - Bottom Step */}
         <Box
           sx={{
-            backgroundColor: "background.paper",
-            border: "2px solid",
+            backgroundColor: "rgba(0, 0, 0, 0.85)",
+            backgroundImage:
+              "linear-gradient(45deg, rgba(0, 0, 0, 0.9) 0%, rgba(20, 20, 20, 0.9) 100%)",
+            border: "3px solid",
             borderColor: "primary.main",
             borderRadius: "8px",
             p: deviceType === "mobile" ? 2 : 3,
@@ -107,10 +118,11 @@ export default function About() {
             sx={{
               fontSize: deviceType === "mobile" ? "0.9rem" : "1rem",
               lineHeight: 1.6,
-              color: "text.primary",
+              color: "rgba(255, 255, 255, 0.9)",
             }}
           >
-            …with a vision to be the most impactful leadership and skills-oriented institution of learning in Africa.
+            …with a vision to be the most impactful leadership and
+            skills-oriented institution of learning in Africa.
           </Typography>
         </Box>
       </Box>
@@ -129,8 +141,10 @@ export default function About() {
       >
         <Box
           sx={{
-            backgroundColor: "background.paper",
-            border: "2px solid",
+             backgroundColor: "rgba(0, 0, 0, 0.85)",
+            backgroundImage:
+              "linear-gradient(45deg, rgba(0, 0, 0, 0.9) 0%, rgba(20, 20, 20, 0.9) 100%)",
+            border: "3px solid",
             borderColor: "primary.main",
             borderRadius: "8px",
             p: deviceType === "mobile" ? 2 : 4,
@@ -142,11 +156,11 @@ export default function About() {
             sx={{
               fontSize: deviceType === "mobile" ? "0.9rem" : "1rem",
               lineHeight: 1.7,
-              color: "text.primary",
+              color: "rgba(255, 255, 255, 0.9)",
               whiteSpace: "pre-line",
             }}
           >
-{`In 605 BC, the king of a reining empire ordered his chief of staff to select a number of talented youths; young men without blemish, handsome, gifted in all wisdom, knowledgeable, quick to understand, and ready to serve; and they were taught and groomed in various aspects of life and knowledge, while also receiving specialized nutrition. These youths became the empire’s instruments of innovation, advancement, development, world dominance and sustainability. Gold Stream Academy have adopted this ancient king’s model in a hybrid (for-profit/non-profit) coeducational platform, in order to address the following overwhelming youth and leadership development challenges plaguing Nigeria and Africa:
+            {`In 605 BC, the king of a reining empire ordered his chief of staff to select a number of talented youths; young men without blemish, handsome, gifted in all wisdom, knowledgeable, quick to understand, and ready to serve; and they were taught and groomed in various aspects of life and knowledge, while also receiving specialized nutrition. These youths became the empire’s instruments of innovation, advancement, development, world dominance and sustainability. Gold Stream Academy have adopted this ancient king’s model in a hybrid (for-profit/non-profit) coeducational platform, in order to address the following overwhelming youth and leadership development challenges plaguing Nigeria and Africa:
 
 The Current Double-Edged Educational and Socio-Economic Need: 
 
@@ -171,4 +185,3 @@ Offering up to 30% of annual admission places to orphans and the underprivileged
     </Box>
   );
 }
-

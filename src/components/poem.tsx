@@ -6,8 +6,8 @@ import spear from "../assets/images/spear.png";
 // Assuming you have imported your custom font via CSS or @font-face already
 // e.g. in your global styles:
 // @font-face {
-//   font-family: "YourCustomFont";
-//   src: url("/fonts/YourCustomFont.woff2") format("woff2"), …;
+//   font-family: "Nosifer";
+//   src: url("/fonts/Nosifer.woff2") format("woff2"), …;
 // }
 
 export default function Poem() {
@@ -48,11 +48,12 @@ export default function Poem() {
         alt="spear left"
         sx={{
           position: "absolute",
-          left: deviceType === "mobile" ? 20 : 150,
+          left: deviceType === "mobile" ? -165 : -500,
           top: 0,
           height: "100%", // make the spear stretch full height if desired
           objectFit: "contain",
           pointerEvents: "none",
+          width: "100%",
           // display: { xs: "none", md: "block" },
         }}
       />
@@ -63,11 +64,12 @@ export default function Poem() {
         alt="spear right"
         sx={{
           position: "absolute",
-          right: deviceType === "mobile" ? 20 : 150,
+          right: deviceType === "mobile" ? -165 : -500,
           top: 0,
           height: "100%",
           objectFit: "contain",
           pointerEvents: "none",
+          width: "100%",
           // display: { xs: "none", md: "block" },
         }}
       />
@@ -75,9 +77,8 @@ export default function Poem() {
       <Typography
         variant="body1"
         color="#D4A017"
-        // Use your custom font here
         sx={{
-          fontFamily: `"YourCustomFont", sans-serif`,
+          fontFamily: "'Nosifer', cursive", // Exact font family with dripping style
           fontWeight: 700,
           textTransform: "uppercase",
           letterSpacing: "0.1em",
@@ -90,6 +91,7 @@ export default function Poem() {
               : deviceType === "tablet"
               ? "18px"
               : "24px",
+          textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)", // Optional: to enhance dripping effect
         }}
       >
         {poemLines.map((line, idx) => (
