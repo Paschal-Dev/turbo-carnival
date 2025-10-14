@@ -79,6 +79,7 @@ const GoldStreamFoundation = () => {
           style={{
             filter: "drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5))",
           }}
+          width={mobile ? 350 : 'auto'}
         />
 
         <Typography
