@@ -69,9 +69,9 @@ export default function About() {
         {/* Left Box - Top Step */}
         <Box
           sx={{
-            backgroundColor: "rgba(0, 0, 0, 0.85)",
+            backgroundColor: "rgba(35, 33, 33, 0.1)",
             backgroundImage:
-              "linear-gradient(45deg, rgba(0, 0, 0, 0.9) 0%, rgba(20, 20, 20, 0.9) 100%)",
+              "linear-gradient(45deg, rgba(0, 0, 0, 1) 0%, rgba(106, 90, 90, 0.86) 100%)",
             border: "3px solid",
             borderColor: "primary.main",
             borderRadius: "8px",
@@ -99,9 +99,9 @@ export default function About() {
         {/* Right Box - Bottom Step */}
         <Box
           sx={{
-            backgroundColor: "rgba(0, 0, 0, 0.85)",
+            backgroundColor: "rgba(35, 33, 33, 0.1)",
             backgroundImage:
-              "linear-gradient(45deg, rgba(0, 0, 0, 0.9) 0%, rgba(20, 20, 20, 0.9) 100%)",
+              "linear-gradient(45deg, rgba(0, 0, 0, 1) 0%, rgba(106, 90, 90, 0.86) 100%)",
             border: "3px solid",
             borderColor: "primary.main",
             borderRadius: "8px",
@@ -141,9 +141,9 @@ export default function About() {
       >
         <Box
           sx={{
-             backgroundColor: "rgba(0, 0, 0, 0.85)",
+             backgroundColor: "rgba(35, 33, 33, 0.1)",
             backgroundImage:
-              "linear-gradient(45deg, rgba(0, 0, 0, 0.9) 0%, rgba(20, 20, 20, 0.9) 100%)",
+              "linear-gradient(45deg, rgba(0, 0, 0, 1) 0%, rgba(106, 90, 90, 0.86) 100%)",
             border: "3px solid",
             borderColor: "primary.main",
             borderRadius: "8px",

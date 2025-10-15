@@ -16,7 +16,7 @@ import {
 } from '@mui/material';
 import { Link as ScrollLink } from 'react-scroll';
 import { Menu as MenuIcon, Close as CloseIcon } from '@mui/icons-material';
-import logo from '../assets/images/gsa_logo.png';
+import logo from '../assets/images/logo.png';
 
 const Header = () => {
   const [activeLink, setActiveLink] = useState<string | null>(null);

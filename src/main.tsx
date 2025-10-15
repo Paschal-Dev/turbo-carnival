@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import logo from './assets/images/gsa_logo.png';
+import logo from './assets/images/logo.png';
 import { Box } from '@mui/system';
 import { Typography } from '@mui/material';
 

@@ -24,11 +24,13 @@ const MediaGallery = () => {
 
   // Sample YouTube video IDs (replace with your actual ones)
   const videoIds = [
-    "OCMRRp8wb00",
-    "sZzXZRiqvIs",
-    "HdF7duaiW50",
-    "LP0vl92xaik",
-    "hFU2l8uYRTA",
+    "yV_MRQ1XPY8",
+    "YTTflPIVfg4",
+    "zqiP99vmuzE",
+    "a6t1-uedVlY",
+    "YGhWzkb9S00",
+    "Ec23aZg9Wk8",
+    "fDhaWp99ikk"
   ];
 
   // Sample still picture URLs (replace with real paths or links)
@@ -51,7 +53,7 @@ const MediaGallery = () => {
   };
 
   const handleSeeMoreClick = () => {
-    window.open("https://www.youtube.com/@YourSchoolChannel", "_blank");
+    window.open("https://www.youtube.com/@GOLDSTREAMACADEMY", "_blank");
   };
 
   const handleNextVideo = () => {
@@ -91,7 +93,7 @@ const MediaGallery = () => {
         </Typography>
 
          {/* -------------------- PHOTO GALLERY SECTION -------------------- */}
-        <Typography
+        {/* <Typography
           variant="h5"
           align="center"
           sx={{
@@ -101,7 +103,7 @@ const MediaGallery = () => {
           }}
         >
           Photo Gallery
-        </Typography>
+        </Typography> */}
 
         <Box
           sx={{

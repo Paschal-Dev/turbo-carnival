@@ -78,7 +78,7 @@ const SchoolBoard = () => {
               sx={{
                 width: mobile ? '100%' : 'calc(50% - 16px)',
                 minWidth: mobile ? '100%' : '300px',
-                backgroundColor: 'background.paper',
+                backgroundColor: 'primary.main',
                 borderRadius: 2,
                 p: 3,
                 boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
@@ -94,10 +94,11 @@ const SchoolBoard = () => {
                   sx={{
                     width: 60,
                     height: 60,
-                    bgcolor: 'primary.main',
+                    bgcolor: 'background.default',
                     mr: 2,
                     fontSize: '1.5rem',
-                    fontWeight: 'bold'
+                    fontWeight: 'bold',
+                    color: 'primary.main'
                   }}
                 >
                   {member.name.split(' ').map(n => n[0]).join('')}
@@ -107,7 +108,7 @@ const SchoolBoard = () => {
                     variant="h5"
                     sx={{
                       fontWeight: 700,
-                      color: 'primary.main'
+                      color: 'background.default'
                     }}
                   >
                     {member.name}
@@ -116,7 +117,7 @@ const SchoolBoard = () => {
                     <Typography
                       variant="subtitle1"
                       sx={{
-                        color: 'secondary.main',
+                        color: 'background.default',
                         fontWeight: 600
                       }}
                     >
@@ -128,7 +129,7 @@ const SchoolBoard = () => {
               <Typography
                 variant="body1"
                 sx={{
-                  color: 'text.secondary',
+                  color: 'text.primary',
                   lineHeight: 1.6,
                   fontSize: mobile ? '0.9rem' : '1rem'
                 }}

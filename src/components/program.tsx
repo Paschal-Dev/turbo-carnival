@@ -19,7 +19,7 @@ const Programs = () => {
     {
       title: "SPORTS",
       description:
-        "From soccer to basketball, we foster teamwork and discipline...",
+        "Football, basketball, athletics, lawn tennis, swimming etc",
       icon: (
         <SportsSoccer
           sx={{ fontSize: mobile ? 40 : 60, color: "primary.main" }}
@@ -28,14 +28,14 @@ const Programs = () => {
     },
     {
       title: "ARTS",
-      description: "Explore creativity through music, art, and drama...",
+      description: "Performing arts, music, movie/film, broadcasting etc",
       icon: (
         <Palette sx={{ fontSize: mobile ? 40 : 60, color: "primary.main" }} />
       ),
     },
     {
       title: "APPLIED SCIENCE",
-      description: "Hands-on science and technology programs...",
+      description: "Practical state of the art scientific innovations",
       icon: (
         <Science sx={{ fontSize: mobile ? 40 : 60, color: "primary.main" }} />
       ),
@@ -43,7 +43,7 @@ const Programs = () => {
     {
       title: "ACADEMICS",
       description:
-        "Our curriculum emphasizes critical thinking and innovation...",
+        "An optimized Nigerian curriculum",
       icon: (
         <School sx={{ fontSize: mobile ? 40 : 60, color: "primary.main" }} />
       ),
