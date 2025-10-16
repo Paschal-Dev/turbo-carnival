@@ -33,7 +33,7 @@ export default function Poem() {
   return (
     <Box
       sx={{
-        mt: deviceType === "mobile" ? 2 : 4,
+        mt: deviceType === "mobile" ? 4 : 8,
         p: deviceType === "mobile" ? 2 : 4,
         position: "relative",
         textAlign: "center",
@@ -82,7 +82,7 @@ export default function Poem() {
           fontWeight: 700,
           textTransform: "uppercase",
           letterSpacing: "0.1em",
-          lineHeight: 1.5, // adjust spacing between lines
+          lineHeight: 2.5, // adjust spacing between lines
           position: "relative",
           zIndex: 1, // bring above spear images if needed
           fontSize:

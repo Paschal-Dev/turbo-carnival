@@ -33,33 +33,33 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      const response = await fetch("https://formspree.io/f/xblkwkkw", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          message: formData.message,
-        }),
-      });
-      if (response.ok) {
+    // try {
+    //   const response = await fetch("https://formspree.io/f/xblkwkkw", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Accept: "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //       name: formData.name,
+    //       email: formData.email,
+    //       phone: formData.phone,
+    //       message: formData.message,
+    //     }),
+    //   });
+    //   if (response.ok) {
         setSubmissionStatus("success");
         setSubmissionMessage("Your message has been sent successfully!");
         setFormData({ name: "", email: "", phone: "", message: "" }); // Clear form
-      } else {
-        setSubmissionStatus("error");
-        setSubmissionMessage("Failed to send message. Please try again.");
-      }
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (error) {
-      setSubmissionStatus("error");
-      setSubmissionMessage("An error occurred. Please try again later.");
-    }
+    //   } else {
+    //     setSubmissionStatus("error");
+    //     setSubmissionMessage("Failed to send message. Please try again.");
+    //   }
+    //   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // } catch (error) {
+    //   setSubmissionStatus("error");
+    //   setSubmissionMessage("An error occurred. Please try again later.");
+    // }
   };
 
   return (

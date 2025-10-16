@@ -1,6 +1,6 @@
-import { useState, type SetStateAction } from "react";
+import { useEffect, useState, type SetStateAction } from "react";
 import {
-  Typography,
+Typography,
   Box,
   Container,
   useTheme,
@@ -10,10 +10,10 @@ import {
 } from "@mui/material";
 import YouTube from "react-youtube";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
-import one from "../../assets/images/new1.webp";
-import two from "../../assets/images/new2.jpg";
-import three from "../../assets/images/new3.avif";
-import four from "../../assets/images/new4.jpg";
+// import one from "../../assets/images/new1.webp";
+// import two from "../../assets/images/new2.jpg";
+// import three from "../../assets/images/new3.avif";
+// import four from "../../assets/images/new4.jpg";
 
 const MediaGallery = () => {
   const theme = useTheme();
@@ -21,6 +21,15 @@ const MediaGallery = () => {
   const tablet = useMediaQuery(theme.breakpoints.down("md"));
 
   const [selectedVideoIndex, setSelectedVideoIndex] = useState(0);
+   const [dots, setDots] = useState(".");
+
+  // Animate "updating....." text
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDots((prev) => (prev.length >= 5 ? "." : prev + "."));
+    }, 400);
+    return () => clearInterval(interval);
+  }, []);
 
   // Sample YouTube video IDs (replace with your actual ones)
   const videoIds = [
@@ -34,12 +43,12 @@ const MediaGallery = () => {
   ];
 
   // Sample still picture URLs (replace with real paths or links)
-  const photos = [
-    one,
-    two,
-    three,
-    four,
-  ];
+  // const photos = [
+  //   one,
+  //   two,
+  //   three,
+  //   four,
+  // ];
 
   const opts = {
     height: mobile ? "200" : "390",
@@ -71,6 +80,11 @@ const MediaGallery = () => {
   const handleThumbnailClick = (index: SetStateAction<number>) => {
     setSelectedVideoIndex(index);
   };
+
+   // 4 animated cards alternating black/red
+  const animatedCards = Array.from({ length: 4 }, (_, i) => ({
+    bgColor: i % 2 === 0 ? "#000" : "#b71c1c",
+  }));
 
   return (
     <Box sx={{ py: mobile ? 4 : 8, bgcolor: "background.default" }} id="media">
@@ -105,7 +119,7 @@ const MediaGallery = () => {
           Photo Gallery
         </Typography> */}
 
-        <Box
+        {/* <Box
           sx={{
             display: "flex",
             flexWrap: "wrap",
@@ -145,6 +159,57 @@ const MediaGallery = () => {
               />
             </Box>
           ))}
+        </Box> */}
+
+        {/* -------------------- Animated Loader Cards Section -------------------- */}
+        <Box
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            gap: mobile ? 2 : 3,
+            px: mobile ? 1 : 0,
+          }}
+        >
+          {animatedCards.map((card, index) => (
+            <Box
+              key={index}
+              sx={{
+                flexBasis: mobile
+                  ? "48%"
+                  : tablet
+                  ? "30%"
+                  : "22%",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <Box
+                sx={{
+                  width: "100%",
+                  height: mobile ? 120 : 180,
+                  borderRadius: 2,
+                  boxShadow: 3,
+                  backgroundColor: card.bgColor,
+                  color: "white",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontWeight: 600,
+                  fontSize: mobile ? "1rem" : "1.3rem",
+                  textTransform: "uppercase",
+                  animation: "pulse 1.5s infinite ease-in-out",
+                  "@keyframes pulse": {
+                    "0%": { opacity: 0.6 },
+                    "50%": { opacity: 1 },
+                    "100%": { opacity: 0.6 },
+                  },
+                }}
+              >
+                updating{dots}
+              </Box>
+            </Box>
+          ))}
         </Box>
 
         {/* -------------------- YOUTUBE SECTION -------------------- */}
@@ -154,6 +219,7 @@ const MediaGallery = () => {
           sx={{
             color: "text.primary",
             mb: mobile ? 3 : 4,
+            mt: mobile ? 3 : 4,
             fontWeight: 600,
           }}
         >
