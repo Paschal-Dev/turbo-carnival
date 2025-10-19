@@ -3,11 +3,12 @@ import {
   Box,
   Container,
   Typography,
-  Card,
-  keyframes,
+  // Card,
+  // keyframes,
   useTheme,
   useMediaQuery,
 } from "@mui/material";
+import { useEffect, useState } from "react";
 
 // --- Commented out original testimonial data ---
 // const testimonials = [
@@ -55,16 +56,29 @@ import {
 //   },
 // ];
 
-const loadingAnimation = keyframes`
-  0% { content: "."; }
-  33% { content: ".."; }
-  66% { content: "..."; }
-  100% { content: "."; }
-`;
+// const loadingAnimation = keyframes`
+//   0% { content: "."; }
+//   33% { content: ".."; }
+//   66% { content: "..."; }
+//   100% { content: "."; }
+// `;
 
 const Testimonials = () => {
   const theme = useTheme();
   const mobile = useMediaQuery(theme.breakpoints.only("xs"));
+  const tablet = useMediaQuery(theme.breakpoints.down("md"));
+  const [dots, setDots] = useState(".");
+  
+    // Animate "updating....." text
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setDots((prev) => (prev.length >= 5 ? "." : prev + "."));
+      }, 400);
+      return () => clearInterval(interval);
+    }, []);
+   const animatedCards = Array.from({ length: 6 }, (_, i) => ({
+    bgColor: i % 2 === 0 ? "#000" : "#b71c1c",
+  }));
 
   return (
     <Box
@@ -91,6 +105,15 @@ const Testimonials = () => {
 
         {/* --- New wallpaper grid replacing testimonial accordions --- */}
         <Box
+                  sx={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    justifyContent: "center",
+                    gap: mobile ? 2 : 3,
+                    px: mobile ? 1 : 4,
+                  }}
+                >
+        {/* <Box
           sx={{
             display: "grid",
             gridTemplateColumns: {
@@ -101,46 +124,46 @@ const Testimonials = () => {
             justifyItems: "center",
             alignItems: "stretch",
           }}
-        >
-          {[...Array(6)].map((_, index) => {
-            const isRed = index === 0 || index === 2 || index === 4;
-            // const isBlack = index === 1 || index === 3 || index === 5;
-
-            return (
-              <Box key={index} sx={{ maxWidth: "400px", width: "100%" }}>
-                <Card
-                  sx={{
-                    height: "100%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    borderRadius: "12px",
-                    backgroundColor: isRed ? "#b71c1c" : "#000",
-                    color: "white",
-                    boxShadow: 3,
-                    position: "relative",
-                    overflow: "hidden",
-                  }}
-                >
-                  <Typography
-                    variant="h5"
-                    sx={{
-                      position: "relative",
-                      fontSize: "1.4rem",
-                      letterSpacing: "2px",
-                      "::after": {
-                        display: "inline-block",
-                        animation: `${loadingAnimation} 1.5s infinite`,
-                        content: '"."',
-                      },
-                    }}
-                  >
-                    updating
-                  </Typography>
-                </Card>
+        > */}
+           {animatedCards.map((card, index) => (
+            <Box
+              key={index}
+              sx={{
+                flexBasis: mobile
+                  ? "48%"
+                  : tablet
+                  ? "30%"
+                  : "22%",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <Box
+                sx={{
+                  width: "100%",
+                  height: mobile ? 120 : 180,
+                  borderRadius: 2,
+                  boxShadow: 3,
+                  backgroundColor: card.bgColor,
+                  color: "white",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontWeight: 600,
+                  fontSize: mobile ? "1rem" : "1.3rem",
+                  textTransform: "uppercase",
+                  animation: "pulse 1.5s infinite ease-in-out",
+                  "@keyframes pulse": {
+                    "0%": { opacity: 0.6 },
+                    "50%": { opacity: 1 },
+                    "100%": { opacity: 0.6 },
+                  },
+                }}
+              >
+                updating{dots}
               </Box>
-            );
-          })}
+            </Box>
+          ))}
         </Box>
 
         {/* --- Commented out original testimonial accordion layout ---

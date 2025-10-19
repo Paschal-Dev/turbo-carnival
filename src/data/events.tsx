@@ -53,39 +53,39 @@ export const events: Event[] = [
     registration: "Register by Aug 5",
     deadline: "August 5, 2024",
   },
-  {
-    id: "3",
-    title: "School Musical",
-    description:
-      "Our students perform a vibrant musical showcasing their talents.",
-    image:
-      "https://welltempered.wordpress.com/wp-content/uploads/2015/08/project-step.jpg",
-    date: "2024-06-15",
-    category: "Music",
-    status: "ongoing",
-    note: "Live stream available",
-  },
-  {
-    id: "4",
-    title: "Art Exhibition",
-    description: "Showcasing student artwork in our annual art exhibition.",
-    image:
-      "https://d3n8a8pro7vhmx.cloudfront.net/onedctrac/mailings/2831/attachments/original/children_pic_for_nl.jpg?1533075431",
-    date: "2024-07-01",
-    category: "School",
-    status: "completed",
-    call: "Submit artwork by June 25",
-    highlights: "Over 50 student artworks displayed!",
-  },
-  {
-    id: "6",
-    title: "Cultural Day",
-    description:
-      "Experience the diversity and creativity of our students on Cultural Day.",
-    image:
-      "https://img.freepik.com/free-photo/kids-having-fun-school_23-2149206005.jpg",
-    date: "2025-01-10",
-    category: "School",
-    status: "upcoming",
-  },
+  // {
+  //   id: "3",
+  //   title: "School Musical",
+  //   description:
+  //     "Our students perform a vibrant musical showcasing their talents.",
+  //   image:
+  //     "https://welltempered.wordpress.com/wp-content/uploads/2015/08/project-step.jpg",
+  //   date: "2024-06-15",
+  //   category: "Music",
+  //   status: "ongoing",
+  //   note: "Live stream available",
+  // },
+  // {
+  //   id: "4",
+  //   title: "Art Exhibition",
+  //   description: "Showcasing student artwork in our annual art exhibition.",
+  //   image:
+  //     "https://d3n8a8pro7vhmx.cloudfront.net/onedctrac/mailings/2831/attachments/original/children_pic_for_nl.jpg?1533075431",
+  //   date: "2024-07-01",
+  //   category: "School",
+  //   status: "completed",
+  //   call: "Submit artwork by June 25",
+  //   highlights: "Over 50 student artworks displayed!",
+  // },
+  // {
+  //   id: "6",
+  //   title: "Cultural Day",
+  //   description:
+  //     "Experience the diversity and creativity of our students on Cultural Day.",
+  //   image:
+  //     "https://img.freepik.com/free-photo/kids-having-fun-school_23-2149206005.jpg",
+  //   date: "2025-01-10",
+  //   category: "School",
+  //   status: "upcoming",
+  // },
 ];
