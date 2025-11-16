@@ -1,8 +1,5 @@
 import banner from "../assets/olympiad-banner.jpg";
 
-/** 
- * MAIN event type for website event listings 
- */
 export interface Event {
   name: string;
   id: string;
@@ -19,20 +16,14 @@ export interface Event {
   note?: string;
 }
 
-/**
- * TYPE for competition events (used in registration)
- */
 export interface CompetitionEvent {
-  id: number;
+  id: string;
   name: string;
   category: "Team" | "Individual";
   gender?: "M" | "F" | "M/F";
   is_team_event?: boolean;
 }
 
-/** 
- * EVENT LISTINGS (used on the public events page)
- */
 export const events: Event[] = [
   {
     id: "5",
@@ -44,7 +35,7 @@ export const events: Event[] = [
     status: "upcoming",
     registration: "Registration ends Oct 15",
     deadline: "October 15, 2025",
-    name: ""
+    name: "Gold Stream Olympiad"
   },
   {
     id: "1",
@@ -55,7 +46,7 @@ export const events: Event[] = [
     category: "Sports",
     status: "completed",
     highlights: "U12 team won 3-2!",
-    name: ""
+    name: "Football (M)"
   },
   {
     id: "2",
@@ -67,43 +58,29 @@ export const events: Event[] = [
     status: "upcoming",
     registration: "Register by Aug 5",
     deadline: "August 5, 2024",
-    name: ""
+    name: "Science Fair"
   },
-  // You can uncomment more events when needed
-  // {
-  //   id: "6",
-  //   title: "Cultural Day",
-  //   description:
-  //     "Experience the diversity and creativity of our students on Cultural Day.",
-  //   image:
-  //     "https://img.freepik.com/free-photo/kids-having-fun-school_23-2149206005.jpg",
-  //   date: "2025-01-10",
-  //   category: "School",
-  //   status: "upcoming",
-  // },
 ];
 
-/**
- * TEAM EVENTS (for registration form)
- */
 export const teamEvents: CompetitionEvent[] = [
-  { id: 1, name: "Football (M)", category: "Team", gender: "M", is_team_event: true },
-  { id: 2, name: "Basketball (F)", category: "Team", gender: "F", is_team_event: true },
-  { id: 3, name: "Athletics (4x400, 4x100) (M/F)", category: "Team", gender: "M/F", is_team_event: true },
-  { id: 4, name: "Singing", category: "Team", is_team_event: true },
-  { id: 5, name: "Dancing", category: "Team", is_team_event: true },
-  { id: 6, name: "Word/Poetry", category: "Team", is_team_event: true },
+  { id: "1", name: "Football (M)", category: "Team", gender: "M", is_team_event: true },
+  { id: "2", name: "Basketball (F)", category: "Team", gender: "F", is_team_event: true },
+  { id: "3", name: "Athletics (4x400, 4x100) (M)", category: "Team", gender: "M", is_team_event: true },
+  { id: "4", name: "Athletics (4x400, 4x100) (F)", category: "Team", gender: "F", is_team_event: true },
+  { id: "5", name: "Singing", category: "Team", is_team_event: true },
+  { id: "6", name: "Dancing", category: "Team", is_team_event: true },
+  { id: "7", name: "Word/Poetry", category: "Team", is_team_event: true },
 ];
 
-/**
- * INDIVIDUAL EVENTS (for registration form)
- */
 export const individualEvents: CompetitionEvent[] = [
-  { id: 7, name: "Lawn Tennis (M/F)", category: "Individual", gender: "M/F" },
-  { id: 8, name: "Table Tennis (M/F)", category: "Individual", gender: "M/F" },
-  { id: 9, name: "Swimming (M/F)", category: "Individual", gender: "M/F" },
-  { id: 10, name: "Athletics (100m; 200m; 400m; 800m; 1500m) (M/F)", category: "Individual", gender: "M/F" },
-  { id: 11, name: "Singing", category: "Individual" },
-  { id: 12, name: "Dancing", category: "Individual" },
-  { id: 13, name: "Word/Poetry", category: "Individual" },
+  { id: "8", name: "Lawn Tennis (M)", category: "Individual", gender: "M" },
+  { id: "9", name: "Lawn Tennis (F)", category: "Individual", gender: "F" },
+  { id: "10", name: "Table Tennis (M)", category: "Individual", gender: "M" },
+  { id: "11", name: "Table Tennis (F)", category: "Individual", gender: "F" },
+  { id: "12", name: "Swimming (M/F)", category: "Individual", gender: "M/F" },
+  { id: "13", name: "Athletics (100m; 200m; 400m; 800m; 1500m) (M)", category: "Individual", gender: "M" },
+  { id: "14", name: "Athletics (100m; 200m; 400m; 800m; 1500m) (F)", category: "Individual", gender: "F" },
+  { id: "15", name: "Singing", category: "Individual" },
+  { id: "16", name: "Dancing", category: "Individual" },
+  { id: "17", name: "Word/Poetry", category: "Individual" },
 ];

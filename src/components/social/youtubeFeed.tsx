@@ -33,6 +33,7 @@ const MediaGallery = () => {
 
   // Sample YouTube video IDs (replace with your actual ones)
   const videoIds = [
+    "jn1dZ_dkgGY",
     "yV_MRQ1XPY8",
     "YTTflPIVfg4",
     "zqiP99vmuzE",

@@ -28,6 +28,9 @@ import {
 } from '@mui/icons-material';
 import { events, type Event } from '../../data/events';
 import RegistrationForm from '../../data/register';
+import { useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+
 
 const loadingAnimation = keyframes`
   0% { content: "."; }
@@ -62,10 +65,24 @@ const EventsSection = () => {
     setRegistrationOpen(true);
   };
 
-  const handleCloseRegistration = () => {
-    setRegistrationOpen(false);
-    setSelectedEventId(null);
-  };
+ const { eventId } = useParams();
+const navigate = useNavigate();
+
+// Automatically open registration form if URL has /register/:eventId
+useEffect(() => {
+  if (eventId) {
+    setSelectedEventId(eventId);
+    setRegistrationOpen(true);
+  }
+}, [eventId]);
+
+// When dialog closes, navigate back to main page
+const handleCloseRegistration = () => {
+  setRegistrationOpen(false);
+  setSelectedEventId(null);
+  navigate('/'); // or '/events' if you prefer
+};
+
 
   const getStatusChip = (status: string) => {
     switch (status) {
@@ -263,9 +280,13 @@ const EventsSection = () => {
                       variant={event.status === 'upcoming' ? 'contained' : 'outlined'}
                       color="primary"
                       disabled={event.status === 'completed'}
-                      onClick={() =>
-                        event.status !== 'completed' && handleRegisterClick(event.id)
-                      }
+                      onClick={() => {
+  if (event.status !== 'completed') {
+    window.history.pushState({}, '', `/register/${event.id}`);
+    handleRegisterClick(event.id);
+  }
+}}
+
                       sx={{
                         textTransform: 'none',
                         fontSize: mobile ? '0.8rem' : '0.9rem',

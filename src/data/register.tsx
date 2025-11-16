@@ -41,6 +41,7 @@ interface FormData {
   school: string;
   eventType: 'Team' | 'Individual' | '';
   eventName: string;
+  eventId: string; // Added to store the selected competition event ID
   additionalInfo: string;
   teamMembers: TeamMember[];
 }
@@ -64,6 +65,7 @@ export default function RegistrationForm({ open, onClose, eventId }: Registratio
     school: '',
     eventType: '',
     eventName: '',
+    eventId: '', // Initialize eventId
     additionalInfo: '',
     teamMembers: [],
   };
@@ -93,21 +95,31 @@ export default function RegistrationForm({ open, onClose, eventId }: Registratio
         console.log('=== EVENT FOUND ===');
         console.log('Found event:', found);
         
-        // Check if this is a team event
+        // Check if this is a team event by checking if it exists in teamEvents
         const isTeamEvent = teamEvents.some(te => String(te.id) === String(found.id));
         const isIndividualEvent = individualEvents.some(ie => String(ie.id) === String(found.id));
         
         console.log('Is team event:', isTeamEvent);
         console.log('Is individual event:', isIndividualEvent);
         
-        const eventType = isTeamEvent ? 'Team' : 'Individual';
+        // Determine event type based on which array contains the event
+        let eventType: 'Team' | 'Individual' | '' = '';
+        if (isTeamEvent) {
+          eventType = 'Team';
+        } else if (isIndividualEvent) {
+          eventType = 'Individual';
+        } else {
+          // If event not found in competition events, default based on event category
+          eventType = found.category === 'Sports' ? 'Team' : 'Individual';
+        }
         
         console.log('Setting event type to:', eventType);
         
         setFormData(prev => ({
           ...prev,
           eventType: eventType,
-          eventName: found.name || ''
+          eventName: found.name || found.title, // Use name if available, otherwise title
+          eventId: found.id // Store the event ID
         }));
       }
     } else {
@@ -128,6 +140,34 @@ export default function RegistrationForm({ open, onClose, eventId }: Registratio
     const val = e.target.value;
     console.log(`Field ${field} changed to:`, val);
     setFormData(prev => ({ ...prev, [field]: val }));
+  };
+
+  // Handle event selection change
+  const handleEventChange = (e: any) => {
+    const selectedEventName = e.target.value;
+    console.log('Selected event:', selectedEventName);
+    
+    // Find the selected event in both team and individual events
+    const selectedTeamEvent = teamEvents.find(te => te.name === selectedEventName);
+    const selectedIndividualEvent = individualEvents.find(ie => ie.name === selectedEventName);
+    
+    const selectedEvent = selectedTeamEvent || selectedIndividualEvent;
+    
+    if (selectedEvent) {
+      console.log('Found selected event:', selectedEvent);
+      setFormData(prev => ({
+        ...prev,
+        eventName: selectedEventName,
+        eventId: selectedEvent.id, // Store the competition event ID
+        eventType: selectedEvent.category // Ensure event type matches the selected event
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        eventName: selectedEventName,
+        eventId: '' // Clear event ID if not found
+      }));
+    }
   };
 
   // TEAM MEMBER HANDLERS
@@ -166,6 +206,11 @@ export default function RegistrationForm({ open, onClose, eventId }: Registratio
     }
 
     if (activeStep === 1) {
+      if (!formData.eventName) {
+        MySwal.fire({ icon: 'warning', title: 'Please select an event' });
+        return false;
+      }
+
       if (formData.eventType === 'Team') {
         if (!formData.school) {
           MySwal.fire({ icon: 'warning', title: 'Please enter your Team/School name' });
@@ -221,9 +266,9 @@ export default function RegistrationForm({ open, onClose, eventId }: Registratio
         console.log('Setting to Team because we have team members');
       } 
       // Check if event is predefined as team event
-      else if (event && teamEvents.some(te => String(te.id) === String(event.id))) {
+      else if (formData.eventId && teamEvents.some(te => String(te.id) === String(formData.eventId))) {
         finalEventType = 'Team';
-        console.log('Setting to Team because event is a team event');
+        console.log('Setting to Team because selected event is a team event');
       }
       // Default to Individual
       else {
@@ -251,9 +296,9 @@ export default function RegistrationForm({ open, onClose, eventId }: Registratio
     }
 
     const payload = {
-      event_id: event?.id ?? null,
-      event_title: event?.title ?? '',
-      event_name: formData.eventName || event?.name || '',
+      event_id: formData.eventId || event?.id || null, // Use selected competition event ID first
+      event_title: event?.title || formData.eventName || '',
+      event_name: formData.eventName || '',
       event_type: finalEventType,
       full_name: finalFullName,
       email: formData.email ?? '',
@@ -290,12 +335,8 @@ export default function RegistrationForm({ open, onClose, eventId }: Registratio
               <p>Your registration has been submitted successfully!</p>
               <p><strong>Registration Number:</strong> ${res.registration_number}</p>
               <p><strong>Event Type:</strong> ${res.event_type}</p>
+              <p><strong>Event:</strong> ${formData.eventName}</p>
               ${res.team_id ? `<p><strong>Team ID:</strong> ${res.team_id}</p>` : ''}
-              ${res.debug ? `<p><strong>Debug Info:</strong><br/>
-                Received: ${res.debug.received_event_type}<br/>
-                Final: ${res.debug.final_event_type}<br/>
-                Team Members: ${res.debug.team_members_count}
-              </p>` : ''}
             </div>
           `,
         });
@@ -336,6 +377,8 @@ export default function RegistrationForm({ open, onClose, eventId }: Registratio
                     ...prev,
                     eventType: newEventType,
                     teamMembers: newEventType === 'Team' ? prev.teamMembers : [],
+                    eventName: '', // Clear event name when type changes
+                    eventId: '', // Clear event ID when type changes
                   }));
                 }}
               >
@@ -347,13 +390,13 @@ export default function RegistrationForm({ open, onClose, eventId }: Registratio
               <Typography color="primary" sx={{ mt: 1, p: 1, bgcolor: 'background.default', borderRadius: 1 }}>
                 Selected: <strong>{formData.eventType} Event</strong>
                 {event && (
-                  <><br/>Event: <strong>{event.title}</strong></>
+                  <><br/>Main Event: <strong>{event.title}</strong></>
                 )}
               </Typography>
             )}
             {!formData.eventType && event && (
               <Typography color="text.secondary" sx={{ mt: 1 }}>
-                Event: <strong>{event.title}</strong>
+                Main Event: <strong>{event.title}</strong>
               </Typography>
             )}
           </Box>
@@ -439,10 +482,14 @@ export default function RegistrationForm({ open, onClose, eventId }: Registratio
               </>
             )}
             
-            <FormControl fullWidth sx={{ mt: 2 }}>
-              <InputLabel>Select Event</InputLabel>
-              <Select value={formData.eventName} label="Select Event" onChange={handleChange('eventName')}>
-                {(formData.eventType === 'Team' ? teamEvents : individualEvents).map((ev: any) => (
+            <FormControl fullWidth sx={{ mt: 2 }} required>
+              <InputLabel>Select Competition Event</InputLabel>
+              <Select 
+                value={formData.eventName} 
+                label="Select Competition Event" 
+                onChange={handleEventChange}
+              >
+                {(formData.eventType === 'Team' ? teamEvents : individualEvents).map((ev) => (
                   <MenuItem key={ev.id} value={ev.name}>{ev.name}</MenuItem>
                 ))}
               </Select>
@@ -465,7 +512,10 @@ export default function RegistrationForm({ open, onClose, eventId }: Registratio
             <Typography variant="h6" gutterBottom>Review Your Registration</Typography>
             <Box sx={{ p: 2, bgcolor: 'background.default', borderRadius: 1 }}>
               <Typography><strong>Event Type:</strong> {formData.eventType}</Typography>
-              <Typography><strong>Event:</strong> {formData.eventName}</Typography>
+              <Typography><strong>Competition Event:</strong> {formData.eventName}</Typography>
+              {event && (
+                <Typography><strong>Main Event:</strong> {event.title}</Typography>
+              )}
               {formData.eventType === 'Team' ? (
                 <>
                   <Typography><strong>Team Name:</strong> {formData.school}</Typography>

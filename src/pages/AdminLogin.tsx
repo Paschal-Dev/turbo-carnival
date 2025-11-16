@@ -38,7 +38,7 @@ const submit = async () => {
     setLoading(true);
     
     // Use direct backend URL for login too
-    const res = await fetch('http://localhost/goldstream-backend/api/login.php', {
+    const res = await fetch('https://goldstreamacademy.com/goldstream-backend/api/login.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

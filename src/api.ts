@@ -1,57 +1,41 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+// frontend/src/api.ts
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
- 
-// export async function getJson(path: string) {
-//   const res = await fetch(path, { 
-//     credentials: 'include',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     }
-//   });
-//   const text = await res.text();
-//   try {
-//     return JSON.parse(text);
-//   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-//   } catch (e) {
-//     return text;
-//   }
-// }
 
-// In your api.ts or AdminDashboard.tsx
-const API_BASE = import.meta.env.DEV 
-  ? 'http://localhost/goldstream-backend'  // Direct backend in dev
-  : '/api';  // Proxy in production
+const API_BASE = import.meta.env.DEV
+  ? 'https://goldstreamacademy.com/goldstream-backend' // full backend URL for dev
+  : 'https://goldstreamacademy.com/goldstream-backend'; // same for production
 
-export async function postJson(path: string, body: any) {
-  const res = await fetch(`${API_BASE}${path}`, {
+export async function postJson(path: string, data: any) {
+  const url = `${API_BASE}${path.startsWith('/') ? path : `/${path}`}`;
+
+  const res = await fetch(url, {
     method: 'POST',
-    headers: { 
-      'Content-Type': 'application/json',
-    },
-    credentials: 'include',
-    body: JSON.stringify(body),
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
   });
-  
+
   const text = await res.text();
   try {
     return JSON.parse(text);
-  } catch (e) {
-    return text;
+  } catch {
+    console.error('Non-JSON response:', text);
+    return { error: 'Invalid server response', raw: text };
   }
 }
 
 export async function getJson(path: string) {
-  const res = await fetch(`${API_BASE}${path}`, { 
+  const url = `${API_BASE}${path.startsWith('/') ? path : `/${path}`}`;
+
+  const res = await fetch(url, {
     credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json',
-    }
+    headers: { 'Content-Type': 'application/json' },
   });
-  
+
   const text = await res.text();
   try {
     return JSON.parse(text);
-  } catch (e) {
+  } catch {
     return text;
   }
 }
